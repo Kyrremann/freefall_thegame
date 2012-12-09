@@ -30,7 +30,15 @@ class Ship {
     text(score, 200 + ox, 50);
     hittingWalls();
     if (!hittingBoxes()) {
-      rect(x + ox, y + oy, 15, 15);
+      if (x < 0) {
+        rect(0 + ox, y + oy, 15 - x, 15);
+        rect(width + x + ox, y + oy, -x, 15);
+      } else if (x > width - 15) {
+        rect(x + ox, y + oy, width - x, 15);
+        rect(0 + ox, y + oy, 15 - (width - x), 15);
+      } else {
+        rect(x + ox, y + oy, 15, 15);
+      }
     } else {
        shipColor -= .15;
        if (shipColor < .30)
