@@ -1,12 +1,15 @@
 class Intro {
   int height, width;
   List<Star> stars;
-  int letterY = -150, letterX = 112, letterBase = 300;
+  int letterY = -150, letterX = 112, letterBase = 150;
+  boolean selectedOne;
+  int playerState = 1;
 
 
   Intro(int height, int width) {
     this.height = height;
     this.width = width;
+    this.selectedOne = true;
     randomSeed(1337^1);
     stars = new ArrayList<Star>();
     for (int i = 0; i < 1000; i++)
@@ -16,10 +19,38 @@ class Intro {
   void draw() {
     drawBackground();
     drawTitle();
-    if (letterY >= letterBase)
+    if (letterY >= letterBase) {
       drawTheGame();
+      drawMenu();
+    }
   }
-  
+
+  void up() {
+    selectedOne = !selectedOne;
+  }
+
+  void down() {
+    selectedOne = !selectedOne;
+  }
+
+  void drawMenu() {
+    textAlign(CENTER);
+    if (selectedOne) {
+      fill(255);
+      text("- One player -", width / 2, height/2 + 48);
+      fill(128);
+      text("Two player", width / 2, height/2 + 96);
+      playerState = 1;
+    } 
+    else {
+      fill(128);
+      text("One player", width / 2, height/2 + 48);
+      fill(255);
+      text("- Two player -", width / 2, height/2 + 96);
+      playerState = 2;
+    }
+  }
+
   void drawTheGame() {
     textAlign(RIGHT);
     text("THE GAME", 887, letterBase + 173);
