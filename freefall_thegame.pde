@@ -22,7 +22,6 @@ void draw() {
     return;
   }
 
-
   fill(000);
   rect(0, 0, width, 50);
   stroke(255);
@@ -63,12 +62,8 @@ void keyPressed() {
   case 'd':
     playerOne.horizontal = RIGHT;
     break;
-  }
-
-  switch(key) {
   case ENTER:
-    if (intro != null)
-      intro = null;
+    intro = null;
     break;
   }
 }
