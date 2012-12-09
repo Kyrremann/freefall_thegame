@@ -3,7 +3,7 @@ class Ship {
   float x, y;
   int height, width;
   int down = 0;
-  final int SHIP_SIZE = 15;
+  static final int SHIP_SIZE = 15;
   final int oy, ox;
   final String name;
   int horizontal = 0;
