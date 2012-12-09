@@ -4,7 +4,6 @@ int height = 700, width = 1000;
 Level level = new Level(600, 400, 50, 550, 20);
 Ship playerOne = new Ship("KHE", 200, 0, 600, 400, 50, 50, level);
 Ship playerTwo = new Ship("SIG", 200, 0, 600, 400, 550, 50, level);
-PImage img;
 
 void setup() {
   size(width, height);
@@ -15,7 +14,6 @@ void setup() {
   noStroke();
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
-  img = loadImage("cartoon_clouds.gif");
 }
 
 void draw() {
@@ -31,33 +29,58 @@ void draw() {
 }
 
 void keyPressed() {
-  if(keyCode == UP) {
-    playerOne.down = UP;
+  switch (keyCode) {
+  case UP:
     playerTwo.down = UP;
-  }else if (keyCode == DOWN){
-    playerOne.down = DOWN;
+    break;
+  case DOWN:
     playerTwo.down = DOWN;
-}else if (keyCode == LEFT){
-    playerOne.horizontal = LEFT;
+    break;
+  case LEFT:
     playerTwo.horizontal = LEFT;
- } else if (keyCode == RIGHT){
-    playerOne.horizontal = RIGHT;
+    break;
+  case RIGHT:
     playerTwo.horizontal = RIGHT;
- }
+    break;
+  }
+  
+  switch (key) {
+  case 'w':
+    playerOne.down = UP;
+    break;
+  case 's':
+    playerOne.down = DOWN;
+    break;
+  case 'a':
+    playerOne.horizontal = LEFT;
+    break;
+  case 'd':
+    playerOne.horizontal = RIGHT;
+    break;
+  }
 }
 
 void keyReleased() {
-  if(keyCode == UP){
-    playerOne.down = 0;
+    switch (keyCode) {
+  case UP:
+  case DOWN:
     playerTwo.down = 0;
-  }else if (keyCode == DOWN){
+    break;
+  case LEFT:
+  case RIGHT:
+    playerTwo.horizontal = 0;
+    break;
+  }
+  
+  switch (key) {
+  case 'w':
+  case 's':
     playerOne.down = 0;
-    playerTwo.down = 0;
-  }else if (keyCode == LEFT){
+    break;
+  case 'a':
+  case 'd':
     playerOne.horizontal = 0;
-    playerTwo.horizontal = 0;
-  }else if (keyCode == RIGHT){
-    playerOne.horizontal = 0;
-    playerTwo.horizontal = 0;
+    break;
   }
 }
+
