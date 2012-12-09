@@ -1,24 +1,16 @@
-class Ship {
+class Ship extends Box{
 
-  float x, y;
-  int height, width;
   int down = 0;
   static final int SHIP_SIZE = 15;
-  final int oy, ox;
   final String name;
   int horizontal = 0;
   int score = 0;
   Level level;
-  float shipColor = 1;
+  float hp = 1;
 
   Ship(String name, int x, int y, int height, int width, int ox, int oy, Level level) {
+    super(x, y, height, width, ox, oy, SHIP_SIZE, color(255, 255, 255));
     this.name = name;
-    this.x = x;
-    this.y = y;
-    this.oy = oy;
-    this.ox = ox;
-    this.height = height;
-    this.width = width;
     this.level = level;
   }
 
@@ -27,40 +19,25 @@ class Ship {
     y += this.down == 0 ? 0.5 : this.down == UP ? -2. : 2.;
     score += y;
 
-    fill(255, 255 * shipColor, 255 * shipColor);
+    fill(c);
     text(score, 200 + ox, 50);
     hittingWalls();
-    if (!hittingBoxes()) {
-      if (x < 0) {
-
-        rect(0 + ox, y + oy, SHIP_SIZE - x, SHIP_SIZE);
-        rect(width + x + ox, y + oy, -x, SHIP_SIZE);
-      } else if (x > width - SHIP_SIZE) {
-        rect(x + ox, y + oy, width - x, SHIP_SIZE);
-        rect(0 + ox, y + oy, SHIP_SIZE - (width - x), SHIP_SIZE);
-      } else {
-        rect(x + ox, y + oy, SHIP_SIZE, SHIP_SIZE);
-      }
-    } else {
-       shipColor -= .15;
-       if (shipColor < .30)
+    
+    super.draw();
+    
+    if(hittingBoxes()) {
+       hp -= .15;
+       setColor(255, int(255 * hp), int(255 * hp));
+       if (hp < .30)
        text("YOU DIED!", 100, 100);
     }
   }
 
   boolean hittingBoxes() {
 
-    for (Level.Box b : level.box) {
-      if ((x + SHIP_SIZE) < b.x)
-        continue;
-      if (x > (b.x + 10))
-        continue;
-      if ((y + SHIP_SIZE) < b.getY())
-        continue;
-      if (y > (b.getY() + 10))
-        continue;
-
-      return true;
+    for (Box b : level.box) {
+      if (collides(b))
+        return true;
     }
 
     return false;
