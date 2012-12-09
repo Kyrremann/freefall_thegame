@@ -4,19 +4,21 @@ int height = 700, width = 1000;
 Level level = new Level(600, 400, 50, 550, 20);
 Ship playerOne = new Ship("KHE", 200, 0, 600, 400, 50, 50, level);
 Ship playerTwo = new Ship("SIG", 200, 0, 600, 400, 550, 50, level);
+Intro intro;
 
 void setup() {
   size(width, height);
   background(#000000);
-  // frameRate(60);
-  // smooth();
-  //stroke(#eeeeee);
   noStroke();
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
+  intro = new Intro(height, width);
 }
 
 void draw() {
+  background(0);
+  intro.draw();
+  /*
   fill(000);
   rect(0, 0, width, 50);
   stroke(255);
@@ -26,6 +28,7 @@ void draw() {
   level.draw();
   playerOne.draw();
   playerTwo.draw();
+  */
 }
 
 void keyPressed() {
@@ -83,4 +86,3 @@ void keyReleased() {
     break;
   }
 }
-
