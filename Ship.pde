@@ -3,6 +3,7 @@ class Ship {
   float x, y;
   int height, width;
   int down = 0;
+  static final int SHIP_SIZE = 15;
   final int oy, ox;
   final String name;
   int horizontal = 0;
@@ -31,13 +32,14 @@ class Ship {
     hittingWalls();
     if (!hittingBoxes()) {
       if (x < 0) {
-        rect(1 + ox, y + oy, 15 - x, 15);
-        rect(width + x + ox, y + oy, -x, 15);
-      } else if (x > width - 15) {
-        rect(x + ox, y + oy, width - x, 15);
-        rect(1 + ox, y + oy, 15 - (width - x), 15);
+
+        rect(0 + ox, y + oy, SHIP_SIZE - x, SHIP_SIZE);
+        rect(width + x + ox, y + oy, -x, SHIP_SIZE);
+      } else if (x > width - SHIP_SIZE) {
+        rect(x + ox, y + oy, width - x, SHIP_SIZE);
+        rect(0 + ox, y + oy, SHIP_SIZE - (width - x), SHIP_SIZE);
       } else {
-        rect(x + ox, y + oy, 15, 15);
+        rect(x + ox, y + oy, SHIP_SIZE, SHIP_SIZE);
       }
     } else {
        shipColor -= .15;
@@ -49,11 +51,11 @@ class Ship {
   boolean hittingBoxes() {
 
     for (Level.Box b : level.box) {
-      if ((x + 15) < b.x)
+      if ((x + SHIP_SIZE) < b.x)
         continue;
       if (x > (b.x + 10))
         continue;
-      if ((y + 15) < b.getY())
+      if ((y + SHIP_SIZE) < b.getY())
         continue;
       if (y > (b.getY() + 10))
         continue;
