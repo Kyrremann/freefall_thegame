@@ -1,7 +1,10 @@
 class Level {
 
   final int ox1, ox2;
+  final int MAX_SPEED = 15;
   int oy;
+  int speed = 2;
+  int limit = speed * speed * 100;
   int height, width, difficulty;
   List<Box> box;
 
@@ -19,7 +22,20 @@ class Level {
   }
 
   void draw() {
-    oy += 15;
+    oy += speed;
+
+    if (oy >= limit) {
+      for (Box b : box) {
+        b.y -= oy;
+      }
+
+      oy = 0;
+      if (speed < MAX_SPEED) {
+        speed++;
+        limit = speed * speed * 100;
+      }
+    }
+
     for (Box b : box)
       b.draw();
   }
@@ -33,13 +49,19 @@ class Level {
 
     void draw() {
       fill(#6DD8D2);
-      if (y < oy) {
-        y += height;
+      if (y + 10 < oy) {
+        y += height + 10;
         x = (int) random(width - 10);
       }
-      
-      rect(x + ox1, y + 50 - oy, 10, min(height - y + oy, 10));
-      rect(x + ox2, y + 50 - oy, 10, min(height - y + oy, 10));
+
+      if (y < oy) {
+        rect(x + ox1, 50, 10, 10 - oy + y);
+        rect(x + ox2, 50, 10, 10 - oy + y);
+        
+      } else {
+        rect(x + ox1, y + 50 - oy, 10, min(height - y + oy, 10));
+        rect(x + ox2, y + 50 - oy, 10, min(height - y + oy, 10));
+      }
     }
 
     int getY() {
