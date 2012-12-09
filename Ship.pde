@@ -31,11 +31,11 @@ class Ship {
     hittingWalls();
     if (!hittingBoxes()) {
       if (x < 0) {
-        rect(0 + ox, y + oy, 15 - x, 15);
+        rect(1 + ox, y + oy, 15 - x, 15);
         rect(width + x + ox, y + oy, -x, 15);
       } else if (x > width - 15) {
         rect(x + ox, y + oy, width - x, 15);
-        rect(0 + ox, y + oy, 15 - (width - x), 15);
+        rect(1 + ox, y + oy, 15 - (width - x), 15);
       } else {
         rect(x + ox, y + oy, 15, 15);
       }

@@ -16,9 +16,13 @@ void setup() {
 }
 
 void draw() {
-  background(0);
-  intro.draw();
-  /*
+  if (intro != null) {
+    background(0);
+    intro.draw();
+    return;
+  }
+
+
   fill(000);
   rect(0, 0, width, 50);
   stroke(255);
@@ -28,7 +32,6 @@ void draw() {
   level.draw();
   playerOne.draw();
   playerTwo.draw();
-  */
 }
 
 void keyPressed() {
@@ -46,7 +49,7 @@ void keyPressed() {
     playerTwo.horizontal = RIGHT;
     break;
   }
-  
+
   switch (key) {
   case 'w':
     playerOne.down = UP;
@@ -61,10 +64,17 @@ void keyPressed() {
     playerOne.horizontal = RIGHT;
     break;
   }
+
+  switch(key) {
+  case ENTER:
+    if (intro != null)
+      intro = null;
+    break;
+  }
 }
 
 void keyReleased() {
-    switch (keyCode) {
+  switch (keyCode) {
   case UP:
   case DOWN:
     playerTwo.down = 0;
@@ -74,7 +84,7 @@ void keyReleased() {
     playerTwo.horizontal = 0;
     break;
   }
-  
+
   switch (key) {
   case 'w':
   case 's':
@@ -86,3 +96,4 @@ void keyReleased() {
     break;
   }
 }
+
