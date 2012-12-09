@@ -1,10 +1,9 @@
-// import processing.opengl.*;
-
 int height = 700, width = 1000;
 Level level = new Level(600, 400, 50, 550, 20);
 Ship playerOne = new Ship("KHE", 200, 0, 600, 400, 50, 50, level);
 Ship playerTwo = new Ship("SIG", 200, 0, 600, 400, 550, 50, level);
 Intro intro;
+int gameState;
 
 void setup() {
   size(width, height);
@@ -13,32 +12,53 @@ void setup() {
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
   intro = new Intro(height, width);
+  gameState = 0;
 }
 
 void draw() {
-  if (intro != null) {
+  switch (gameState) {
+  case 0:
     background(0);
     intro.draw();
-    return;
+    break;
+  case 1:
+    fill(000);
+    rect(0, 0, width, 50);
+    stroke(255);
+    rect(50, 50, 400, 600);
+    rect(550, 50, 400, 600);
+    noStroke();
+    level.draw();
+    playerOne.draw();
+    break;
+  case 2:
+    fill(000);
+    rect(0, 0, width, 50);
+    stroke(255);
+    rect(50, 50, 400, 600);
+    rect(550, 50, 400, 600);
+    noStroke();
+    level.draw();
+    playerOne.draw();
+    playerTwo.draw();
+    break;
   }
-
-  fill(000);
-  rect(0, 0, width, 50);
-  stroke(255);
-  rect(50, 50, 400, 600);
-  rect(550, 50, 400, 600);
-  noStroke();
-  level.draw();
-  playerOne.draw();
-  playerTwo.draw();
 }
 
 void keyPressed() {
   switch (keyCode) {
   case UP:
+    if (intro != null) {
+      intro.up();
+      break;
+    }
     playerTwo.down = UP;
     break;
   case DOWN:
+    if (intro != null) {
+      intro.down();
+      break;
+    }
     playerTwo.down = DOWN;
     break;
   case LEFT:
@@ -63,7 +83,10 @@ void keyPressed() {
     playerOne.horizontal = RIGHT;
     break;
   case ENTER:
-    intro = null;
+    if (gameState == 0) {
+      gameState = intro.playerState;
+      intro = null;
+    }
     break;
   }
 }
