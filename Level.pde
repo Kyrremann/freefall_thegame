@@ -14,7 +14,7 @@ class Level {
     this.box = new ArrayList<Box>();
 
     for (int i = 0; i < difficulty; i++) {
-      box.add(new Box((int) random(0, width), (int) random(0, height)));
+      box.add(new Box((int) random(0, width - 10), (int) random(0, height)));
     }
   }
 
@@ -35,12 +35,11 @@ class Level {
       fill(#6DD8D2);
       if (y < oy) {
         y += height;
-        x = (int) random(width);
+        x = (int) random(width - 10);
       }
-      if (y - oy < height) {
-        rect(x + ox1, y + 50 - oy, 10, 10);
-        rect(x + ox2, y + 50 - oy, 10, 10);
-      }
+      
+      rect(x + ox1, y + 50 - oy, 10, min(height - y + oy, 10));
+      rect(x + ox2, y + 50 - oy, 10, min(height - y + oy, 10));
     }
 
     int getY() {
