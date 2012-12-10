@@ -10,9 +10,9 @@ class Level {
   float widthFactor = 8;
   int min_width = Ship.SHIP_SIZE * 5, max_width = int(Ship.SHIP_SIZE * widthFactor);
   int max_bend = BOX_SIZE;
-  int x, y, bend;
+  float x, y, bend;
   float w;
-  final int[] bend_factor = {-2, -1, -1, 0, 0, 0, 1, 1, 2};
+  final float[] bend_factor = {-2, -1.75, -1.2, -0.65, -0.27, -0.09, 0, 0.09, 0.27, 0.65, 1.2, 1.75, 2};
   boolean even = false;
 
   Level(int height, int width, int ox1, int ox2, int difficulty) {
