@@ -52,6 +52,8 @@ void keyPressed() {
       intro = null;
     }
     
+    background(0);
+    
     return;
   }
   
