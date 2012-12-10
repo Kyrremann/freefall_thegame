@@ -39,10 +39,10 @@ class Level {
     }
     for (int i = boxes_per_screen - 4; i < boxes_per_screen; i++) {
       Box b = box.get(i * 2);
-      b.c = color(0,0,0,0);
+      b.setColor(0,0,0,0);
       b.penetrable = true;
       b = box.get(i * 2 + 1);
-      b.c = color(0,0,0,0);
+      b.setColor(0,0,0,0);
       b.penetrable = true;
     }
   }
