@@ -1,9 +1,10 @@
 int height = 700, width = 1000;
-Intro intro = new Intro(height, width);
-Level level = new Level(600, 400, 50, 550, 20);
-Ship playerOne = new Ship("KHE", 200, 0, 600, 400, 50, 50, level);
-Ship playerTwo = new Ship("SIG", 200, 0, 600, 400, 550, 50, level);
+Intro intro;
+Level level;
+Ship playerOne;
+Ship playerTwo;
 int gameState;
+int timeOut;
 
 void setup() {
   size(width, height);
@@ -11,7 +12,16 @@ void setup() {
   noStroke();
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
+  reset();
+}
+
+private final void reset() {
+  intro = new Intro(height, width);
+  level = new Level(600, 400, 50, 550, 20);
+  playerOne = new Ship("KHE", 200, 0, 600, 400, 50, 50, level);
+  playerTwo = new Ship("SIG", 200, 0, 600, 400, 550, 50, level);
   gameState = 0;
+  timeOut = 180;
 }
 
 void draw() {
@@ -29,6 +39,15 @@ void draw() {
     noStroke();
     level.draw();
     playerOne.draw();
+    
+    if (playerOne.dead) {
+      if (timeOut < 0) {
+        reset();
+      } else {
+        timeOut--;
+      }
+    }
+    
     break;
   case 2:
     fill(000);
@@ -40,6 +59,15 @@ void draw() {
     level.draw();
     playerOne.draw();
     playerTwo.draw();
+    
+    if (playerOne.dead && playerTwo.dead) {
+      if (timeOut < 0) {
+        reset();
+      } else {
+        timeOut--;
+      }
+    }
+    
     break;
   }
 }
