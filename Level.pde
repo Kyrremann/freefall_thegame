@@ -36,6 +36,14 @@ class Level {
       box.add(new Wall((int)(x - w), i * BOX_SIZE));
       box.add(new Wall((int)(x + w), i * BOX_SIZE));
     }
+    for (int i = boxes_per_screen - 4; i < boxes_per_screen; i++) {
+      Box b = box.get(i * 2);
+      b.c = color(0,0,0,0);
+      b.penetrable = true;
+      b = box.get(i * 2 + 1);
+      b.c = color(0,0,0,0);
+      b.penetrable = true;
+    }
   }
 
   void draw() {

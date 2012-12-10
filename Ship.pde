@@ -2,6 +2,7 @@ class Ship extends Box{
 
   boolean dead;
   int down = 0;
+  static final int BOTTOM = 575;
   static final int SHIP_SIZE = 15;
   final String name;
   int horizontal = 0;
@@ -18,6 +19,9 @@ class Ship extends Box{
   void draw() {
     x += horizontal == 0 ? .0 : horizontal == LEFT ? -6. : 6.;
     y += this.down == 0 ? 0.5 : this.down == UP ? -2. : 2.;
+    if (y > BOTTOM)
+      y = BOTTOM;
+    
     fill(c);
     if (!dead)
       score += y;
