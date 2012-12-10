@@ -11,7 +11,7 @@ TODO
 ====
 * ~~Controller for the second player~~
 * ~~Intro and menu~~
-* "Game Over" window, but still let the other player continue
+* ~~"Game Over" window, but still let the other player continue~~
 * Smoother controllers
 * Levels/difficulty
 * ~~Remove the boxes that get painted outside the player area~~
@@ -21,8 +21,8 @@ TODO
 * Support other resolutions
 * Highscore (maybe connect it to the GM Scoreboard)
 * Paralaxing background in the playing area
-* A ~~much~~ better level generator
-* Replay?
+* A ~~much~~ *slightly* better level generator
+* ~~Replay?~~
 * Let the user choose a pixel (stats?color?size?)
 * Implement physics, so when the pixel bumps into another pixel it will bounce
 * Splatter effect when the pixel crashes head on with another pixel
