@@ -25,6 +25,23 @@ class Intro {
     }
   }
 
+  int select() {
+    if (letterY >= letterBase) {
+      if (keyCode == UP) {
+        up();
+      } else if (keyCode == DOWN) {
+        down();
+      } else if (key == ENTER) {
+        return playerState;
+      }
+      
+    } else if (key == ENTER) {
+      letterY = letterBase;
+    }
+    
+    return 0;
+  }
+  
   void up() {
     selectedOne = !selectedOne;
   }

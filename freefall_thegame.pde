@@ -45,19 +45,21 @@ void draw() {
 }
 
 void keyPressed() {
+  if (gameState == 0) {
+    gameState = intro.select();
+    
+    if (gameState != 0) {
+      intro = null;
+    }
+    
+    return;
+  }
+  
   switch (keyCode) {
   case UP:
-    if (intro != null) {
-      intro.up();
-      break;
-    }
     playerTwo.down = UP;
     break;
   case DOWN:
-    if (intro != null) {
-      intro.down();
-      break;
-    }
     playerTwo.down = DOWN;
     break;
   case LEFT:
@@ -80,12 +82,6 @@ void keyPressed() {
     break;
   case 'd':
     playerOne.horizontal = RIGHT;
-    break;
-  case ENTER:
-    if (gameState == 0) {
-      gameState = intro.playerState;
-      intro = null;
-    }
     break;
   }
 }
