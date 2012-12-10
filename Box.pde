@@ -1,4 +1,5 @@
 class Box {
+  boolean penetrable;
   int oy, ox;
   float x, y;
   int height, width;
@@ -48,6 +49,9 @@ class Box {
   }
 
   boolean collides(Box b) {
+    if (penetrable || b.penetrable)
+      return false;
+      
     if (y + size < b.y)
       return false;
 
