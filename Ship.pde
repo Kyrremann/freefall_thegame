@@ -1,5 +1,6 @@
 class Ship extends Box{
 
+  boolean dead;
   int down = 0;
   static final int SHIP_SIZE = 15;
   final String name;
@@ -17,9 +18,12 @@ class Ship extends Box{
   void draw() {
     x += horizontal == 0 ? .0 : horizontal == LEFT ? -6. : 6.;
     y += this.down == 0 ? 0.5 : this.down == UP ? -2. : 2.;
-    score += y;
-
     fill(c);
+    if (!dead)
+      score += y;
+    else
+      text("GAME OVER!", width / 2 + ox, height / 2 + oy);
+      
     text(score, 200 + ox, 50);
     hittingWalls();
     
@@ -28,8 +32,8 @@ class Ship extends Box{
     if(hittingBoxes()) {
        hp -= .15;
        setColor(255, int(255 * hp), int(255 * hp));
-       if (hp < .30)
-       text("YOU DIED!", 100, 100);
+       if (hp < 0)
+         dead = true;
     }
   }
 
