@@ -58,6 +58,7 @@ class Level {
         widthFactor -= 0.08;
         max_width = int(Ship.SHIP_SIZE * widthFactor);
         min_width = max_width - 3;
+        box.add(new Blocker(random(0, width), height));
       }
     }
 
@@ -96,6 +97,31 @@ class Level {
         even = !even;
       }
 
+      ox = ox1;
+      super.draw();
+      ox = ox2;
+      super.draw();
+    }
+  }
+  
+  class Blocker extends Box {
+    Blocker(float x, float y) {
+      super(x, y, Level.this.height, Level.this.width, ox1, 50, BOX_SIZE, color(64, 128, 255));
+      while (x < 0) {
+        x += width;
+      }
+      x %= width;
+      this.x = x;
+    }
+    
+    void draw() {
+      y -= speed;
+      
+      if (y < -size) {
+        y += size + height;
+        x = random(0, width);
+      }
+      
       ox = ox1;
       super.draw();
       ox = ox2;
