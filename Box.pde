@@ -25,41 +25,47 @@ class Box {
     float dy = y;
     float dw = size;
     float dh = size;
-    
+
     if (x < 0) {
       dx = width + x;
       dw = -x;
     } else if (x > width - size) {
       dw = width - x;
     }
-    
+
     if (y < 0) {
       dy = 0;
       dh = size + y;
     } else if (y > height - size) {
       dh = height - y;
     }
-    
+
     fill(c);
     rect(dx + ox, dy + oy, dw, dh);
     if (dw < size) {
       rect(ox, dy + oy, size - dw, dh);
     }
   }
-  
+
   boolean collides(Box b) {
     if (y + size < b.y)
       return false;
-    
+
     if (y > b.y + b.size)
       return false;
-    
-    if (x > b.x + b.size)
+
+    float rx = x + size - width;
+    if (rx < 0) {
+      if (x > b.x + b.size)
+        return false;
+
+      if (x + size < b.x)
+        return false;
+        
+    } else if (rx < b.x && b.x + b.size < x) {
       return false;
-    
-    if (x + size < b.x)
-      return false;
-    
+    }
+
     return true;
   }
 }
