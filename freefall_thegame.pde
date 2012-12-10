@@ -1,8 +1,8 @@
 int height = 700, width = 1000;
+Intro intro = new Intro(height, width);
 Level level = new Level(600, 400, 50, 550, 20);
 Ship playerOne = new Ship("KHE", 200, 0, 600, 400, 50, 50, level);
 Ship playerTwo = new Ship("SIG", 200, 0, 600, 400, 550, 50, level);
-Intro intro;
 int gameState;
 
 void setup() {
@@ -11,7 +11,6 @@ void setup() {
   noStroke();
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
-  intro = new Intro(height, width);
   gameState = 0;
 }
 
