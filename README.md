@@ -9,19 +9,19 @@ Two players can play, one steer with 'left', 'right', 'up' to reduce speed, and 
 
 TODO
 ====
-* Controller for the second player
-* Intro and menu
-* "Game Over" window, but still let the other palyer continue
+* ~~Controller for the second player~~
+* ~~Intro and menu~~
+* "Game Over" window, but still let the other player continue
 * Smoother controllers
 * Levels/difficulty
-* Remove the boxes that get painted outside the player area
-* Paint the pixel on both side when you are close to the edge
+* ~~Remove the boxes that get painted outside the player area~~
+* ~~Paint the pixel on both side when you are close to the edge~~
 * Let a second player just "jump" into a game
 * Some background around the "areas" the game is playing on
 * Support other resolutions
 * Highscore (maybe connect it to the GM Scoreboard)
 * Paralaxing background in the playing area
-* A much better level generator
+* A ~~much~~ better level generator
 * Replay?
 * Let the user choose a pixel (stats?color?size?)
 * Implement physics, so when the pixel bumps into another pixel it will bounce
