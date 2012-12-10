@@ -43,29 +43,13 @@ class Ship extends Box{
     return false;
   }
 
-  void moveUp(int yPos) {
-    y -= yPos;
-  }
-
-  void moveDown(int yPos) {
-    y += yPos;
-  }
-
-  void moveLeft(int xPos) {
-    x -= xPos;
-  }
-
-  void moveRight(int xPos) {
-    x += xPos;
-  }
-
   void hittingWalls() {
     if (y > height)
       y = 0;
     else if (x >= (width))
-      x = -8;
-    else if ((x + 7.5) < 0)
-      x = width - 5;
+      x = 0;
+    else if (x < 0)
+      x = width + x;
   }
 }
 
