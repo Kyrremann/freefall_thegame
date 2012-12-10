@@ -31,7 +31,7 @@ class Level {
     }
     for (int i = boxes_per_screen / 2; i < boxes_per_screen; i++) {
       bend = max(-max_bend, min(max_bend, bend + bend_factor[(int) random(0, bend_factor.length)]));
-      w = max(min_width, min(max_width, w + random(-BOX_SIZE / 2, BOX_SIZE / 2)));
+      w = max(min_width, min(max_width, w + bend_factor[(int) random(0, bend_factor.length)]));
       x += bend;
       box.add(new Wall((int)(x - w), i * BOX_SIZE));
       box.add(new Wall((int)(x + w), i * BOX_SIZE));
@@ -78,7 +78,7 @@ class Level {
         y += height + size;
         if (even) {
           bend = max(-max_bend, min(max_bend, bend + bend_factor[(int) random(0, bend_factor.length)]));
-          w = max(min_width, min(max_width, w + random(-BOX_SIZE / 2, BOX_SIZE / 2)));
+          w = max(min_width, min(max_width, w + bend_factor[(int) random(0, bend_factor.length)]));
           Level.this.x += bend;
           x = Level.this.x - w;
         } else {
