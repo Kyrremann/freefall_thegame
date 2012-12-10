@@ -53,7 +53,7 @@ class Ship extends Box{
 
   void hittingWalls() {
     if (y > height)
-      y = 0;
+      y = height - SHIP_SIZE;
     else if (x >= (width))
       x = 0;
     else if (x < 0)
