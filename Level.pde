@@ -7,7 +7,8 @@ class Level {
   int limit = speed * speed * 100;
   int height, width, difficulty;
   List<Box> box;
-  int min_width = Ship.SHIP_SIZE * 4, max_width = Ship.SHIP_SIZE * 8;
+  float widthFactor = 8;
+  int min_width = Ship.SHIP_SIZE * 5, max_width = int(Ship.SHIP_SIZE * widthFactor);
   int max_bend = BOX_SIZE;
   int x, y, bend;
   float w;
@@ -54,6 +55,9 @@ class Level {
       if (speed < MAX_SPEED) {
         speed++;
         limit = speed * speed * 100;
+        widthFactor -= 0.08;
+        max_width = int(Ship.SHIP_SIZE * widthFactor);
+        min_width = max_width - 3;
       }
     }
 
