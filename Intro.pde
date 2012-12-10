@@ -142,14 +142,14 @@ class Intro {
       this.x = x;
       this.y = y;
       this.size = size;
-      trail = size * 2;
+      trail = size * size * size;
     }
 
     void draw() {
       //rect(x, y, size, size);
-      triangle(x, y, x + size, y, x + (size / 2), y + size + trail);
-      y -= size / 2;
-      if (y < 0)
+      quad(x, y, x + (size / 2), y - size, x + size, y, x + (size / 2), y + trail);
+      y -= size;
+      if (y < -trail)
         y = height;
     }
   }
