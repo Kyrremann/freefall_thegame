@@ -85,9 +85,6 @@ void keyPressed() {
     if (gameState != 0) {
       intro = null;
     }
-    
-    background(0);
-    
     return;
   }
   
