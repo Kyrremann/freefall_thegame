@@ -45,6 +45,8 @@ void draw() {
         reset();
       } else {
         timeOut--;
+        color c = playerOne.c;
+        playerOne.setColor(int(red(c)), int(blue(c)), int(green(c)), int(timeOut * 1.42));
       }
     }
     
@@ -65,6 +67,10 @@ void draw() {
         reset();
       } else {
         timeOut--;
+        color c = playerOne.c;
+        playerOne.setColor(int(red(c)), int(blue(c)), int(green(c)), int(timeOut * 1.42));
+        c = playerTwo.c;
+        playerTwo.setColor(int(red(c)), int(blue(c)), int(green(c)), int(timeOut * 1.42));
       }
     }
     

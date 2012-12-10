@@ -20,6 +20,10 @@ class Box {
   void setColor(int r, int g, int b) {
     c = color(r, g, b);
   }
+  
+  void setColor(int r, int g, int b, int a) {
+    c = color(r, g, b, a);
+  }
 
   void draw() {
     float dx = x;
