@@ -22,6 +22,7 @@ private final void reset() {
   playerTwo = new Ship("SIG", 200, 0, 600, 400, 550, 50, level);
   gameState = 0;
   timeOut = 180;
+  smooth();
 }
 
 void draw() {
@@ -84,6 +85,8 @@ void keyPressed() {
     
     if (gameState != 0) {
       intro = null;
+      background(0);
+      noSmooth();
     }
     return;
   }
