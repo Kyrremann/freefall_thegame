@@ -6,7 +6,7 @@ class Box {
   int size;
   color c;
 
-  Box(int x, int y, int height, int width, int ox, int oy, int size, color c) {
+  Box(float x, float y, int height, int width, int ox, int oy, int size, color c) {
     this.oy = oy;
     this.ox = ox;
     this.width = width;
