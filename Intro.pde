@@ -13,7 +13,7 @@ class Intro {
     randomSeed(1337^1);
     stars = new ArrayList<Star>();
     for (int i = 0; i < 1000; i++)
-      stars.add(new Star((int) random(height), (int) random(width), (int) random(3)));
+      stars.add(new Star(random(height), random(width), random(3)));
   }
 
   void draw() {
@@ -27,10 +27,8 @@ class Intro {
 
   int select() {
     if (letterY >= letterBase) {
-      if (keyCode == UP) {
-        up();
-      } else if (keyCode == DOWN) {
-        down();
+      if (keyCode == UP || keyCode == DOWN) {
+        selectedOne = !selectedOne;
       } else if (key == ENTER) {
         return playerState;
       }
@@ -41,14 +39,6 @@ class Intro {
     
     return 0;
   }
-  
-  void up() {
-    selectedOne = !selectedOne;
-  }
-
-  void down() {
-    selectedOne = !selectedOne;
-  }
 
   void drawMenu() {
     textAlign(CENTER);
@@ -58,8 +48,8 @@ class Intro {
       fill(128);
       text("Two player", width / 2, height/2 + 96);
       playerState = 1;
-    } 
-    else {
+      
+    } else {
       fill(128);
       text("One player", width / 2, height/2 + 48);
       fill(255);
@@ -146,18 +136,19 @@ class Intro {
 
   class Star {
 
-    int x, y, trail, size;
+    float x, y, trail, size;
 
-    Star(int y, int x, int size) {
+    Star(float y, float x, float size) {
       this.x = x;
       this.y = y;
       this.size = size;
-      trail = 4;
+      trail = size * 2;
     }
 
     void draw() {
-      rect(x, y, size, size);
-      y -= 3;
+      //rect(x, y, size, size);
+      triangle(x, y, x + size, y, x + (size / 2), y + size + trail);
+      y -= size / 2;
       if (y < 0)
         y = height;
     }
