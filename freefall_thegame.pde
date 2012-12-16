@@ -5,13 +5,21 @@ Ship playerOne;
 Ship playerTwo;
 int gameState;
 int timeOut;
+float scaling;
+int ox, oy;
 
 void setup() {
-  size(width, height);
+  size(displayWidth, displayHeight);
   background(#000000);
   noStroke();
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
+  
+  scaling = (float) Math.min((double) displayWidth / width,
+                             (double) displayHeight / height);
+  ox = (int) (displayWidth - width * scaling) / 2;
+  oy = (int) (displayHeight - height * scaling) / 2;
+  
   reset();
 }
 
@@ -26,6 +34,8 @@ private final void reset() {
 }
 
 void draw() {
+  scale(scaling);
+  translate(ox, oy);
   switch (gameState) {
   case 0:
     background(0);
