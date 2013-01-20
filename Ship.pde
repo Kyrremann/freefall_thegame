@@ -1,4 +1,4 @@
-class Ship extends Box{
+class Ship extends Box {
 
   boolean dead;
   int down = 0;
@@ -21,23 +21,27 @@ class Ship extends Box{
     y += this.down == 0 ? 0.5 : this.down == UP ? -2. : 2.;
     if (y > BOTTOM)
       y = BOTTOM;
-    
+
     fill(c);
     if (!dead)
       score += y;
     else
       text("GAME OVER!", width / 2 + ox, height / 2 + oy);
-      
+
     text(score, 200 + ox, 50);
     hittingWalls();
-    
+
     super.draw();
-    
-    if(hittingBoxes()) {
-       hp -= .15;
-       setColor(255, int(255 * hp), int(255 * hp));
-       if (hp < 0)
-         dead = true;
+
+    if (hittingBoxes()) {
+      hp -= .15;
+      setColor(255, int(255 * hp), int(255 * hp));
+      if (hp < 0)
+        dead = true;
+    } 
+    else if (hp > 0) {
+      hp = hp < 1f ? hp + 0.001f : 1f;
+      setColor(255, int(255 * hp), int(255 * hp));
     }
   }
 

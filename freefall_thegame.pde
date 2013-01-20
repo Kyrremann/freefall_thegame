@@ -14,12 +14,12 @@ void setup() {
   noStroke();
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
-  
-  scaling = (float) Math.min((double) displayWidth / width,
-                             (double) displayHeight / height);
+
+  scaling = (float) Math.min((double) displayWidth / width, 
+  (double) displayHeight / height);
   ox = (int) (displayWidth - width * scaling) / 2;
   oy = (int) (displayHeight - height * scaling) / 2;
-  
+
   reset();
 }
 
@@ -50,17 +50,18 @@ void draw() {
     noStroke();
     level.draw();
     playerOne.draw();
-    
+
     if (playerOne.dead) {
       if (timeOut < 0) {
         reset();
-      } else {
+      } 
+      else {
         timeOut--;
         color c = playerOne.c;
         playerOne.setColor(int(red(c)), int(blue(c)), int(green(c)), int(timeOut * 1.42));
       }
     }
-    
+
     break;
   case 2:
     fill(000);
@@ -72,11 +73,12 @@ void draw() {
     level.draw();
     playerOne.draw();
     playerTwo.draw();
-    
+
     if (playerOne.dead && playerTwo.dead) {
       if (timeOut < 0) {
         reset();
-      } else {
+      } 
+      else {
         timeOut--;
         color c = playerOne.c;
         playerOne.setColor(int(red(c)), int(blue(c)), int(green(c)), int(timeOut * 1.42));
@@ -84,7 +86,7 @@ void draw() {
         playerTwo.setColor(int(red(c)), int(blue(c)), int(green(c)), int(timeOut * 1.42));
       }
     }
-    
+
     break;
   }
 }
@@ -92,7 +94,7 @@ void draw() {
 void keyPressed() {
   if (gameState == 0) {
     gameState = intro.select();
-    
+
     if (gameState != 0) {
       intro = null;
       background(0);
@@ -100,7 +102,7 @@ void keyPressed() {
     }
     return;
   }
-  
+
   switch (keyCode) {
   case UP:
     playerTwo.down = UP;
@@ -154,5 +156,9 @@ void keyReleased() {
     playerOne.horizontal = 0;
     break;
   }
+}
+
+boolean sketchFullScreen() {
+  return true;
 }
 
