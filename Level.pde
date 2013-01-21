@@ -11,7 +11,7 @@ class Level {
   int min_width = Ship.SHIP_SIZE * 5, max_width = int(Ship.SHIP_SIZE * widthFactor);
   int max_bend = BOX_SIZE;
   float x, y, bend;
-  int bgY;
+  int bgY, colorY;
   float w;
   final float[] bend_factor = {-2, -1.75, -1.2, -0.65, -0.27, -0.09, 0, 0.09, 0.27, 0.65, 1.2, 1.75, 2};
   boolean even = false;
@@ -51,6 +51,7 @@ class Level {
   void draw() {
     y += speed;
     bgY += speed;
+    colorY++;
 
     if (y >= limit) {
       y = 0;
@@ -80,10 +81,31 @@ class Level {
     for (Box b : box)
       b.draw();
   }
+  
+  color getColor() {
+    float h = (colorY / 600.0) % 6;
+    int i = (int) h;
+    float f = h - i;
+    
+    switch(i) {
+      case 0:
+        return color(255, f * 255, 0);
+      case 1:
+        return color((1 - f) * 255, 255, 0);
+      case 2:
+        return color(0, 255, f * 255);
+      case 3:
+        return color(0, (1.0 - f) * 255, 255);
+      case 4:
+        return color(f * 255, 0, 255);
+      default:
+        return color(255, 0, (1.0 - f) * 255);
+    }
+  }
 
   class Wall extends Box {
     Wall(int x, int y) {
-      super(x, y, Level.this.height, Level.this.width, ox1, 50, BOX_SIZE, color(112, 208, 208));
+      super(x, y, Level.this.height, Level.this.width, ox1, 50, BOX_SIZE, getColor());
       while (x < 0) {
         x += width;
       }
@@ -96,6 +118,7 @@ class Level {
 
       if (y < -size) {
         y += height + size;
+        c = getColor();
         if (even) {
           bend = max(-max_bend, min(max_bend, bend + bend_factor[(int) random(0, bend_factor.length)]));
           w = max(min_width, min(max_width, w + bend_factor[(int) random(0, bend_factor.length)]));
@@ -121,7 +144,7 @@ class Level {
   
   class Blocker extends Box {
     Blocker(float x, float y) {
-      super(x, y, Level.this.height, Level.this.width, ox1, 50, BOX_SIZE, color(64, 128, 255));
+      super(x, y, Level.this.height, Level.this.width, ox1, 50, BOX_SIZE, getColor());
       while (x < 0) {
         x += width;
       }
@@ -134,6 +157,7 @@ class Level {
       
       if (y < -size) {
         y += size + height;
+        c = getColor();
         x = random(0, width);
       }
       
