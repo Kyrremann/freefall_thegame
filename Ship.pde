@@ -18,7 +18,7 @@ class Ship extends Box {
 
   void draw() {
     x += horizontal == 0 ? .0 : horizontal == LEFT ? -6. : 6.;
-    y += this.down == 0 ? 0.5 : this.down == UP ? -2. : 2.;
+    y += this.down == 0 ? .0 : this.down == UP ? -2. : 2.;
     if (y > BOTTOM)
       y = BOTTOM;
 
