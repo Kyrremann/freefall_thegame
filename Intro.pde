@@ -85,9 +85,9 @@ class Intro {
 
   void drawR(int x, int y) { 
     rect(x, y, 25, 125);
-    rect(x + 25, y, 25, 25);
+    rect(x, y, 50, 25);
     rect(x + 50, y + 25, 25, 25);
-    rect(x + 25, y + 50, 25, 25);
+    rect(x, y + 50, 50, 25);
     rect(x + 50, y + 75, 25, 50);
   }
 
