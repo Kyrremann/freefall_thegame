@@ -11,6 +11,7 @@ class Level {
   int min_width = Ship.SHIP_SIZE * 5, max_width = int(Ship.SHIP_SIZE * widthFactor);
   int max_bend = BOX_SIZE;
   float x, y, bend;
+  int bgY;
   float w;
   final float[] bend_factor = {-2, -1.75, -1.2, -0.65, -0.27, -0.09, 0, 0.09, 0.27, 0.65, 1.2, 1.75, 2};
   boolean even = false;
@@ -39,16 +40,17 @@ class Level {
     }
     for (int i = boxes_per_screen - 4; i < boxes_per_screen; i++) {
       Box b = box.get(i * 2);
-      b.setColor(0,0,0,0);
+      b.setColor(1,1,1,0);
       b.penetrable = true;
       b = box.get(i * 2 + 1);
-      b.setColor(0,0,0,0);
+      b.setColor(1,1,1,0);
       b.penetrable = true;
     }
   }
 
   void draw() {
     y += speed;
+    bgY += speed;
 
     if (y >= limit) {
       y = 0;
@@ -61,6 +63,19 @@ class Level {
         box.add(new Blocker(random(0, width), height));
       }
     }
+    
+    if (bgY > height)
+      bgY -= height;
+    int h = height - bgY;
+    
+    copy(bgImg, 0, bgY, bgImg.width, h,
+         ox1, 50, width, h);
+    copy(bgImg, 0, 0, bgImg.width, bgY,
+         ox1, 50 + h, width, bgY);
+    copy(bgImg, 0, bgY, bgImg.width, h,
+         ox2, 50, width, h);
+    copy(bgImg, 0, 0, bgImg.width, bgY,
+         ox2, 50 + h, width, bgY);
 
     for (Box b : box)
       b.draw();
