@@ -7,6 +7,7 @@ int gameState;
 int timeOut;
 float scaling;
 int ox, oy;
+PImage bgImg;
 
 void setup() {
   size(displayWidth, displayHeight);
@@ -14,9 +15,22 @@ void setup() {
   noStroke();
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
+  
+  bgImg = loadImage("data/clouds.png");
+  PImage tmpBg = createImage(bgImg.width * 10, bgImg.height * 10, RGB);
+  for (int x = 0; x < bgImg.width; x++) {
+    for (int y = 0; y < bgImg.height; y++) {
+      for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+          tmpBg.set(x * 10 + i, y * 10 + j, bgImg.get(x, y));
+        }
+      }
+    }
+  }
+  bgImg = tmpBg;
 
   scaling = (float) Math.min((double) displayWidth / width, 
-  (double) displayHeight / height);
+                             (double) displayHeight / height);
   ox = (int) (displayWidth - width * scaling) / 2;
   oy = (int) (displayHeight - height * scaling) / 2;
 
@@ -34,8 +48,8 @@ private final void reset() {
 }
 
 void draw() {
-  scale(scaling);
   translate(ox, oy);
+  scale(scaling);
   switch (gameState) {
   case 0:
     background(0);
@@ -48,6 +62,7 @@ void draw() {
     rect(50, 50, 400, 600);
     rect(550, 50, 400, 600);
     noStroke();
+    
     level.draw();
     playerOne.draw();
 
