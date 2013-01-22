@@ -27,7 +27,7 @@ class Intro {
 
   int select() {
     if (letterY >= letterBase) {
-      if (keyCode == UP || keyCode == DOWN) {
+      if (keyCode == UP || keyCode == DOWN || key == 'w' || key == 's') {
         selectedOne = !selectedOne;
       } else if (key == ENTER) {
         return playerState;
