@@ -3,8 +3,10 @@ class Level {
   final int ox1, ox2;
   final int MAX_SPEED = 15;
   final int BOX_SIZE = 10;
-  int speed = 2;
-  int limit = speed * speed * 100;
+  float speed = 2.0;
+  int bgSpeed = (int)(speed / 2);
+  float limit = speed * speed * 100.0;
+  float acceleration = 3.0 / limit;
   int height, width, difficulty;
   ArrayList<Box> box;
   float widthFactor = 8;
@@ -50,14 +52,19 @@ class Level {
 
   void draw() {
     y += speed;
-    bgY += speed;
+    bgY += bgSpeed;
     colorY++;
+    
+    if (speed < MAX_SPEED) {
+      speed += acceleration;
+    }
 
     if (y >= limit) {
       y = 0;
       if (speed < MAX_SPEED) {
-        speed++;
-        limit = speed * speed * 100;
+        bgSpeed = (int)(speed / 2);
+        limit = speed * speed * 100.0;
+        acceleration = 3.0 / limit;
         widthFactor -= 0.08;
         max_width = int(Ship.SHIP_SIZE * widthFactor);
         min_width = max_width - 3;
@@ -118,7 +125,9 @@ class Level {
 
       if (y < -size) {
         y += height + size;
-        c = getColor();
+        if (alpha(c) == 255) {
+          c = getColor();
+        }
         if (even) {
           bend = max(-max_bend, min(max_bend, bend + bend_factor[(int) random(0, bend_factor.length)]));
           w = max(min_width, min(max_width, w + bend_factor[(int) random(0, bend_factor.length)]));
