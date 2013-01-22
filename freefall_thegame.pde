@@ -13,6 +13,7 @@ void setup() {
   size(displayWidth, displayHeight);
   background(#000000);
   noStroke();
+  noCursor();
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
   
