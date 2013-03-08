@@ -1,4 +1,5 @@
 int height = 700, width = 1000;
+
 Intro intro;
 Level level;
 Ship playerOne;
@@ -16,7 +17,7 @@ void setup() {
   noCursor();
   textAlign(CENTER);
   textFont(loadFont("ComicSansMS-48.vlw"), 48);
-  
+
   bgImg = loadImage("data/clouds.png");
   PImage tmpBg = createImage(bgImg.width * 10, bgImg.height * 10, RGB);
   for (int x = 0; x < bgImg.width; x++) {
@@ -31,7 +32,7 @@ void setup() {
   bgImg = tmpBg;
 
   scaling = (float) Math.min((double) displayWidth / width, 
-                             (double) displayHeight / height);
+  (double) displayHeight / height);
   ox = (int) (displayWidth - width * scaling) / 2;
   oy = (int) (displayHeight - height * scaling) / 2;
 
@@ -40,12 +41,12 @@ void setup() {
 
 private final void reset() {
   intro = new Intro(height, width);
-  level = new Level(600, 400, 50, 550, 20);
-  playerOne = new Ship("KHE", 200, 0, 600, 400, 50, 50, level);
-  playerTwo = new Ship("SIG", 200, 0, 600, 400, 550, 50, level);
-  gameState = 0;
-  timeOut = 180;
-  smooth();
+   level = new Level(600, 400, 50, 550, 20);
+   playerOne = new Ship("KHE", 200, 0, 600, 400, 50, 50, level);
+   playerTwo = new Ship("SIG", 200, 0, 600, 400, 550, 50, level);
+   gameState = 0;
+   timeOut = 180;
+   smooth();
 }
 
 void draw() {
@@ -63,13 +64,14 @@ void draw() {
     rect(50, 50, 400, 600);
     rect(550, 50, 400, 600);
     noStroke();
-    
+
     level.draw();
     playerOne.draw();
 
     if (playerOne.dead) {
       if (timeOut < 0) {
-        reset();
+        exitGame();
+        // reset();
       } 
       else {
         timeOut--;
@@ -92,7 +94,7 @@ void draw() {
 
     if (playerOne.dead && playerTwo.dead) {
       if (timeOut < 0) {
-        reset();
+        exitGame();
       } 
       else {
         timeOut--;
@@ -105,6 +107,11 @@ void draw() {
 
     break;
   }
+}
+
+void exitGame() {
+  System.out.println("exit " + playerOne.score + "," + playerTwo.score);
+  exit();
 }
 
 void keyPressed() {

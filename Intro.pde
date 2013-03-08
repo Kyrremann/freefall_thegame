@@ -29,14 +29,15 @@ class Intro {
     if (letterY >= letterBase) {
       if (keyCode == UP || keyCode == DOWN || key == 'w' || key == 's') {
         selectedOne = !selectedOne;
-      } else if (key == ENTER) {
+      } 
+      else if (key == 'r' || key == 't' || key == 'f' || key == 'g' || key == 'o' || key == 'p' || key == 'k' || key == 'l') {
         return playerState;
       }
-      
-    } else if (key == ENTER) {
+    } 
+    else if (key == ENTER) {
       letterY = letterBase;
     }
-    
+
     return 0;
   }
 
@@ -48,8 +49,8 @@ class Intro {
       fill(128);
       text("Two player", width / 2, height/2 + 96);
       playerState = 1;
-      
-    } else {
+    } 
+    else {
       fill(128);
       text("One player", width / 2, height/2 + 48);
       fill(255);
@@ -109,7 +110,7 @@ class Intro {
     rect(x, y, 25, 125);
     rect(x, y + 100, 75, 25);
   }
-  
+
   void drawBackground() {
     fill(255);
     for (Star s : stars)
